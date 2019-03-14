@@ -110,6 +110,21 @@ easyrsa sign-req client matooa-client
 ```
 
 
+#### Curl Client Request 
+
+Run the following curl command to send requests to the server using curl 
+
+```
+curl -vvv -k \
+--cacert crypto/certauth/pki/ca.crt \
+--key crypto/client/pki/private/matooa-client.key \
+--cert crypto/certauth/pki/issued/matooa-client.crt \
+-X POST -d "HelloYo" -H "Content-Type: text/plain" https://localhost:8443/post 
+```
+
+Curl asks for the PEM password (for the key), enter this and it should successfully connect to the server and 
+get a response.
+
 ## References
 
 ### Spring Boot TLS
