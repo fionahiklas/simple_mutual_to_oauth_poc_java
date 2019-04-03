@@ -137,6 +137,8 @@ easyrsa sign-req client matooa-client
 
 ### Spring Boot TLS
 
-* [Tutorial](https://www.baeldung.com/x-509-authentication-in-spring-security)
-
+* [TLS security](https://www.baeldung.com/x-509-authentication-in-spring-security)
+* [OAuth2 security](https://www.baeldung.com/spring-security-5-oauth2-login)
+* [OAuth2 client](https://spring.io/guides/tutorials/spring-boot-oauth2/)
+* [OAuth2 client and server](https://developer.okta.com/blog/2018/04/02/client-creds-with-spring-boot)
 
