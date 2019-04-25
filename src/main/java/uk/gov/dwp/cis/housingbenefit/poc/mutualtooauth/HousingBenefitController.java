@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -24,6 +25,11 @@ public class HousingBenefitController {
 
     private static final Logger log = LogManager.getLogger();
 
+    @Value("${http.client.ssl.trust-store}")
+    private Resource keyStore;
+
+    @Value("${http.client.ssl.trust-store-password}")
+    private String keyStorePassword;
 
     @Value("${kong.baseUrl}")
     private String serverBaseUrl;
@@ -39,7 +45,7 @@ public class HousingBenefitController {
         String user = principal.getName();
         log.info("getClaim principal: {}", user);
 
-        log.info("getClaim calling dosnstream");
+        log.info("getClaim calling downstream");
         String response = restClient.getForObject(serverBaseUrl+"/status", String.class);
         return "Get Worked!";
     }
@@ -50,7 +56,7 @@ public class HousingBenefitController {
         log.info("postClaim resource called with request body: {}", requestBody);
 
         String user = principal.getName();
-        log.info("getClaim principal: {}", user);
+        log.info("postClaim principal: {}", user);
         return "Post Worked!";
     }
 
@@ -63,7 +69,8 @@ public class HousingBenefitController {
 
     @Bean
     protected RestTemplate restTemplate(@Autowired ClientCredentialsResourceDetails oAuthResourceDetails) {
-       return new OAuth2RestTemplate(oAuthResourceDetails);
+        RestTemplate restTemplate = new OAuth2RestTemplate(oAuthResourceDetails);
+        return restTemplate;
     }
 }
 

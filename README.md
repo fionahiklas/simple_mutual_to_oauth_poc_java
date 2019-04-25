@@ -96,6 +96,17 @@ Adding the CA certificate to the trust store
 keytool -importcert -alias matooa-ca -keystore keystore/truststore.jks -trustcacerts -file crypto/certauth/pki/ca.crt 
 ```
 
+#### Downstream CA cert
+
+Following the same approach as above to include the certification authority for Kong (the OAuth2 gateway) 
+
+Adding the CA certificate to the trust store
+
+```
+keytool -importcert -alias kong-ca -keystore keystore/truststore.jks -trustcacerts -file ../../kong_test_setup/crypto/ca/pki/ca.crt
+```
+
+
 
 #### Create Client Crypto 
 
